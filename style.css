@@ -1,0 +1,30 @@
+@import url(./assets/css/navegacao.css);
+@import url(./assets/css/produtos.css);
+@import url(./assets/css/modal.css);
+
+/* fonts */
+
+/* noto-serif */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
+
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Noto Serif', serif;
+}
+
+a{
+    border: none;
+}
+
+body{
+    min-width: 320px;
+    display: grid;
+    justify-content: center;
+    background: linear-gradient(to right, rgb(0, 0, 0) 35%, rgb(255, 255, 255) 25%)
+}
+
+

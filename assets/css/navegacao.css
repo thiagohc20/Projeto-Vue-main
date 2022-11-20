@@ -1,0 +1,16 @@
+.navegacao{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+
+    max-width: 1000px;
+    width: 100vw;
+    padding: 0px 40px;
+    margin-top: 20px;
+}
+
+.carrinho{
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
