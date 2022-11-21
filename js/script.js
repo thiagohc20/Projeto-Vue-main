@@ -4,9 +4,13 @@ const app = {
             produtos:[],
             produtoInfo:[],
             avaliacoes:[],
+
+            /* Modal */
             modal:false,
             modalAtivo: 'ativo',
-            carrinho:[]
+            /* carrinho */
+            carrinho:[],
+            modalCarrinho:false
         }
     },
     methods:{
@@ -28,13 +32,25 @@ const app = {
         fecharModal(){
             this.modal = !this.modal
         },
-        adicionarItem(id){
-          const item = 1
-          console.log(this.carrinho.push(item))
+        adicionarItem(){
+            const id = this.produtoInfo.id
+            const nome = this.produtoInfo.nome
+            const preco = this.produtoInfo.preco
+            this.produtoInfo.estoque--
+            this.carrinho.push({id,nome,preco})
+        },
+        toggleCarrinho(){
+            this.modalCarrinho = !this.modalCarrinho
         }
     },
     mounted(){
         this.getProdutos()
+    },
+    computed:{
+        somaProduto(){
+            const valores = this.carrinho.map((item) => item.preco)
+            // return valores.reduce((total,num) => Number(total) + Number(num))
+        }
     }
 }
 

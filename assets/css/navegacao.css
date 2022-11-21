@@ -8,6 +8,10 @@
     margin-top: 20px;
 }
 
+.navegacao svg{
+    cursor: pointer;
+}
+
 .carrinho{
     display: flex;
     gap: 8px;

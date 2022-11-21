@@ -63,9 +63,3 @@
     cursor: pointer;
     font-family: Arial, Helvetica, sans-serif;
 }
-
-/* toggle modal */
-
-.ativo{
-    display: grid;
-}

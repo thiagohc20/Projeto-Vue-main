@@ -1,0 +1,62 @@
+.modal-carrinho::before{
+    content: "";
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.376);
+}
+
+.modal-carrinho{
+    display: none;
+    justify-content: center;
+    position: absolute;
+    top: 80px;
+    left: 0px;
+    z-index: 1;
+    width: 100%;
+}
+
+.modal-carrinho-container{
+    max-width: 900px;
+    padding: 40px;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+}
+
+.lista-itens{
+    width: 100%;
+    padding: 10px 0px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+
+}
+
+.lista-itens > div{
+    padding: 10px 0px;
+    display: flex;
+    width: 80vw;
+    max-width: 700px;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(129, 126, 126, 0.686);
+}
+
+.lista-itens > p{
+    padding: 10px 0px;
+    text-align: end;
+}
+
+.fechar-carrinho{
+    position: absolute;
+    right: -10px;
+    top: -20px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
