@@ -20,24 +20,30 @@
 
 .modal-carrinho-container{
     max-width: 900px;
+    width: 90vw;
+    margin: 40px;
     padding: 40px;
     background-color: rgb(255, 255, 255);
     position: relative;
 }
 
+.modal-carrinho-container h2{
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+}
+
 .lista-itens{
+    display: none;
     width: 100%;
     padding: 10px 0px;
-    border-top: 2px solid black;
     border-bottom: 2px solid black;
-
 }
 
 .lista-itens > div{
     padding: 10px 0px;
     display: flex;
-    width: 80vw;
-    max-width: 700px;
+    align-items: center;
+    width: 100%;
     justify-content: space-between;
     border-bottom: 1px solid rgba(129, 126, 126, 0.686);
 }
@@ -45,6 +51,31 @@
 .lista-itens > p{
     padding: 10px 0px;
     text-align: end;
+}
+
+.preco {
+    display: flex;
+    gap: 10px;
+}
+
+.remover{
+    cursor: pointer;
+    padding: 2px;
+    background-color: rgb(173, 174, 174);
+}
+
+.msg-btn{
+    display: grid;
+}
+
+.vazio{
+    display: none;
+    margin-top: 10px;
+}
+
+.finalizar{
+    display: none;
+    justify-self: flex-end;
 }
 
 .fechar-carrinho{

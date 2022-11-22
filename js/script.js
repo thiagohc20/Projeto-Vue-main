@@ -10,7 +10,8 @@ const app = {
             modalAtivo: 'ativo',
             /* carrinho */
             carrinho:[],
-            modalCarrinho:false
+            modalCarrinho:false,
+            itemTrue:false
         }
     },
     methods:{
@@ -38,6 +39,10 @@ const app = {
             const preco = this.produtoInfo.preco
             this.produtoInfo.estoque--
             this.carrinho.push({id,nome,preco})
+            this.carrinho.length > 0 ? this.itemTrue = true : this.itemTrue = false
+        },
+        removerItem(id){
+            console.log(this.carrinho[id].remove())
         },
         toggleCarrinho(){
             this.modalCarrinho = !this.modalCarrinho
@@ -49,7 +54,10 @@ const app = {
     computed:{
         somaProduto(){
             const valores = this.carrinho.map((item) => item.preco)
-            // return valores.reduce((total,num) => Number(total) + Number(num))
+            const result = valores.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                0);
+            return result
         }
     }
 }

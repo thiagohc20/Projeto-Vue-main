@@ -15,12 +15,19 @@
             <div class="modal-carrinho" :class="modalCarrinho === true? 'ativo' : 'nao'">
                 <div class="modal-carrinho-container">
                     <h2>Carrinho</h2>
-                    <div class="lista-itens">
-                        <div v-for="item in carrinho" :key="item.id">
+                    <div class="lista-itens" :class="itemTrue ? 'ativo' : 'nao'">
+                        <div v-for="(item, index) in carrinho" :key="item.id">
                             <p>{{ item.nome }}</p>
-                            <p>R$ {{ item.preco }}</p>
+                            <div class="preco">
+                                <p>R$ {{ item.preco }}</p>
+                                <button class="remover" @click="removerItem(index)">Remover</button>
+                            </div>
                         </div>
                         <p>Total:R$ {{ somaProduto }}</p>
+                    </div>
+                    <div class="msg-btn">
+                        <p class="vazio" :class=" itemTrue ?  'nao' : 'ativo' ">O carrinho está vazio</p>
+                        <button class="botao finalizar" :class="itemTrue ? 'ativo' : 'nao'">Finalizar Compra</button>
                     </div>
                     <button class="fechar-carrinho" @click="toggleCarrinho()">X</button>
                 </div>
@@ -33,13 +40,11 @@
                     </div>
                     <div class="item-descricao">
                         <div>
-                            
                             <p>R$ {{ produtoInfo.preco }}</p>
                             <p>{{ produtoInfo.nome }}</p>
                             <p>{{ produtoInfo.descricao }}</p>
-        
                         </div>
-                        <button class="adicionar" @click="adicionarItem(produtoInfo.nome)">Adicionar Item</button>
+                        <button class="botao" @click="adicionarItem(produtoInfo.nome)">Adicionar Item</button>
                         <div>
                             <h3>Avaliações</h3>
                             <div v-for="avaliacao in avaliacoes">
@@ -68,7 +73,7 @@
                     </svg>
                 </div>
                 <div class="carrinho">
-                    <p>R$ 0,00 | {{ carrinho.length }}</p>
+                    <p>R$ {{ somaProduto }} | {{ carrinho.length }}</p>
                     <svg @click="toggleCarrinho"
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
