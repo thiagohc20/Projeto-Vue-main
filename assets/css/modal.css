@@ -64,3 +64,8 @@
     cursor: pointer;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.estoqueDisponivel{
+    pointer-events: none;
+    background-color: gray;
+}

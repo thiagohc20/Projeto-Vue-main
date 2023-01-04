@@ -43,8 +43,9 @@
                             <p>R$ {{ produtoInfo.preco }}</p>
                             <p>{{ produtoInfo.nome }}</p>
                             <p>{{ produtoInfo.descricao }}</p>
+                            <p>{{ produtoInfo.estoque }}</p>
                         </div>
-                        <button class="botao" @click="adicionarItem(produtoInfo.nome)">Adicionar Item</button>
+                        <button class="botao" :class="{estoqueDisponivel: semEstoque}" @click="adicionarItem(produtoInfo.id)">Adicionar Item</button>
                         <div>
                             <h3>Avaliações</h3>
                             <div v-for="avaliacao in avaliacoes">

@@ -2,7 +2,7 @@ const app = {
     data() {
         return {
             produtos:[],
-            produtoInfo:[],
+            produtoInfo:false,
             avaliacoes:[],
 
             /* Modal */
@@ -11,7 +11,9 @@ const app = {
             /* carrinho */
             carrinho:[],
             modalCarrinho:false,
-            itemTrue:false
+            itemTrue:false,
+            /*Estoque */
+            semEstoque:false
         }
     },
     methods:{
@@ -41,6 +43,7 @@ const app = {
             this.produtoInfo.estoque--
             this.carrinho.push({id,nome,preco})
             this.salvarValores(id,nome,preco)
+            this.verificarEstoque()
         },
         //Funcao para remover produto do carrinho        
         removerItem(id){
@@ -57,7 +60,6 @@ const app = {
         //Salvar cookie
         salvarValores(id,nome,preco){
             const produtos = {id,nome,preco}
-            console.log(produtos)
             let itens = this.pegarCookie()
             itens.push(produtos)
             localStorage.setItem("produtos", JSON.stringify(itens))
@@ -74,16 +76,40 @@ const app = {
         excluirCookie(id){
             let itens = this.pegarCookie()
             itens = itens.filter(function (item,index){
-            if(index !== id){
-                return item
-            }
+                if(index !== id){
+                    return item
+                }
             })
             localStorage.setItem("produtos", JSON.stringify(itens))
+        },
+        
+        // ----- Fim Local Storage ------
+        compararEstoque(){
+            //Se algum produto do estoque estiver no carrinho,
+            //Verifica a quantidade e subtrai o valor
+            const itensFiltrados = this.carrinho.filter((item) => 
+            item.id === this.produtoInfo.id
+            )
+            this.produtoInfo.estoque -= itensFiltrados.length
+        },
+        
+        verificarEstoque(){
+            this.produtoInfo.estoque === 0
+            ? this.semEstoque = true
+            : this.semEstoque = false
         }
-
     },
     mounted(){
         this.getProdutos()
+        this.verificarEstoque()
+    },
+    watch:{
+        produtoInfo(){
+            if(this.produtoInfo){
+                this.compararEstoque()
+                this.verificarEstoque()
+            }
+        },
     },
     computed:{
         somaProduto(){
@@ -93,6 +119,7 @@ const app = {
             ? this.itemTrue = true 
             : this.itemTrue = false
 
+            //Soma os valores do carrinho
             const valores = this.carrinho.map((item) => item.preco)
             const result = valores.reduce(
                 (accumulator, currentValue) => accumulator + currentValue,
