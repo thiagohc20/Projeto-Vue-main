@@ -8,6 +8,7 @@
     padding: 0px 40px;
     z-index: 2;
     width: 100%;
+    cursor: pointer;
 }
 
 .info-produto {
@@ -15,7 +16,6 @@
     padding-left: 40px;
     box-shadow: 4px 4px 10px 4px rgb(210, 207, 207);
     background-color: white;
-    cursor: pointer;
 }
 
 .info-produto > div{
@@ -45,9 +45,13 @@
 }
 
 @media (max-width:600px){
+    .info-produto{
+        box-shadow: 0px 0px 10px 4px rgba(172, 171, 171, 0.3);;
+    }
     .info-produto p:nth-child(2){
         font-size: 32px;
     }
+    
 }
 
 @media (max-width:500px){
