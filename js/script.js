@@ -8,12 +8,13 @@ const app = {
             /* Modal */
             modal:false,
             modalAtivo: 'ativo',
-            /* carrinho */
+            /* Carrinho */
             carrinho:[],
             modalCarrinho:false,
             itemTrue:false,
             /*Estoque */
-            semEstoque:false
+            semEstoque:false,
+            mensagemAdicionar:false
         }
     },
     methods:{
@@ -22,6 +23,7 @@ const app = {
             const data = await response.json()
             this.produtos = data
         },
+        //Seta o produto clicado no array
         async getProdutoInfo(id){
             const response = await fetch(`./api/produtos/${id}/dados.json`)
             const data = await response.json()
@@ -29,14 +31,21 @@ const app = {
             this.avaliacoes = data.reviews
         },
         abrirModal(id){
+            //Rola a tela para o inicio
+            scroll({
+                top:0,
+                behavior: "smooth"
+            })
+            //Toggle modal
             this.modal = !this.modal
+            //Traz o produto clicado
             this.getProdutoInfo(id)
         },
         fecharModal(){
             this.modal = !this.modal
         },
-        //Funcao para adicionar item ao carrinho e setar no localStorage
-        adicionarItem(){
+        //Adiciona item ao carrinho e setar no localStorage
+        adicionarItem(a,event){
             const id = this.produtoInfo.id
             const nome = this.produtoInfo.nome
             const preco = this.produtoInfo.preco
@@ -44,14 +53,22 @@ const app = {
             this.carrinho.push({id,nome,preco})
             this.salvarValores(id,nome,preco)
             this.verificarEstoque()
+            this.produtoAdicionado()
         },
-        //Funcao para remover produto do carrinho        
+        //Chama a mensagem de produto adicionado
+        produtoAdicionado(){
+            this.mensagemAdicionar = true
+            setTimeout(() => {
+                this.mensagemAdicionar = false
+            }, 900);
+        },
+        //Remove produto do carrinho        
         removerItem(id){
             this.produtoInfo.estoque++
             this.carrinho.splice(id,1)
             this.excluirCookie(id)
         },
-        //Funcao para abrir modal do carrinho
+        //Abre modal do carrinho
         toggleCarrinho(){
             this.modalCarrinho = !this.modalCarrinho
         },
@@ -94,9 +111,14 @@ const app = {
         },
         
         verificarEstoque(){
-            this.produtoInfo.estoque === 0
-            ? this.semEstoque = true
-            : this.semEstoque = false
+            const adicionarProduto = document.querySelector('#adicionarProduto')
+            if(this.produtoInfo.estoque === 0){
+                this.semEstoque = true
+                adicionarProduto.innerText = 'Produto Esgotado'
+            }else{
+                this.semEstoque = false
+                adicionarProduto.innerText = 'Adicionar Produto'
+            }
         }
     },
     mounted(){
